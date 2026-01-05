@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'AddNameScreen.dart';
+import '../AddNameScreen.dart';
+import 'NameList.dart';
+import 'AddButton.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,27 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           if(names.isEmpty) Container(margin: EdgeInsets.only(top: 20), child: Text("No names yet", style: TextStyle(color: Colors.blueGrey))),
-          Flexible(
-            flex: 3,
-            child: ListView.builder(
-              itemCount: names.length,
-              itemBuilder: (context, index){
-                return Container(
-                  color: Colors.white,
-                  margin: EdgeInsets.only(top: 10),
-                  padding: EdgeInsets.all(20),
-                  child: Center(child: Text(names[index], style: TextStyle(color: Colors.blueGrey))),
-                );
-              }
-            )
-          ),
-          Flexible(
-            flex: 1,
-            child: ElevatedButton(
-              onPressed: goToAddName,
-              child: Text("+", style: TextStyle(color: Colors.blueGrey))
-            )
-          )
+          Namelist(names: names),
+          AddButton(addName: goToAddName)
         ],
       ),
     );

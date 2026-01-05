@@ -41,7 +41,9 @@ class AddNameScreen extends StatelessWidget {
                         SnackBar(content: Text("Name Input is empty"))
                       );
                     } 
-                    Navigator.pop(context, name);
+                    else{
+                      Navigator.pop(context, name);
+                    }
                   },
                   child: Text("Add", style: TextStyle(color: Colors.blueGrey))
                 )
