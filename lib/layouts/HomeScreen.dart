@@ -12,14 +12,15 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> names = [];
 
   Future<void> goToAddName() async{
-    final name = await Navigator.push(
+    String name = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => const AddNameScreen()
+        builder: (_) => AddNameScreen()
       )
     );
 
     setState(() {
+      if(name.isEmpty)return;
       print(name);
       names.add(name);
     });

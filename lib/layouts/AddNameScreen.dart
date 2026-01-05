@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+final textColor = TextStyle(
+    color: Colors.white70
+);
+
 class AddNameScreen extends StatelessWidget {
-  const AddNameScreen({super.key});
+  AddNameScreen({super.key});
 
   final TextEditingController controller = TextEditingController();
 
@@ -12,15 +16,38 @@ class AddNameScreen extends StatelessWidget {
           title: Title(color: Colors.white, child: Center(child: Text("Name Manager", style: textColor))),
           backgroundColor: Colors.blueGrey,
         ),
-        body: Column(
-          children: [
-            Flexible(
-              flex: 2,
-              child: TextField(
-
+        body: Container(
+          margin: EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              Flexible(
+                flex: 2,
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    border: OutlineInputBorder()
+                  ),
+                )
+              ),
+              Flexible(
+                flex: 1,
+                child: ElevatedButton(
+                  onPressed: (){
+                    String name = controller.text;
+                    if(name.isEmpty){
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Name Input is empty"))
+                      );
+                    } 
+                    Navigator.pop(context, name);
+                  },
+                  child: Text("Add", style: TextStyle(color: Colors.blueGrey))
+                )
               )
-            )
-          ],
+            ],
+          ),
         ),
         backgroundColor: Colors.black87,
       );
