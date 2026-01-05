@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'NameItem.dart';
 
 class Namelist extends StatelessWidget {
   final List<String> names;
@@ -17,67 +18,75 @@ class Namelist extends StatelessWidget {
                 color: Colors.white,
                 margin: EdgeInsets.only(top: 10),
                 padding: EdgeInsets.all(20),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Center(child: Text(names[index], style: TextStyle(color: Colors.blueGrey))),
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: (){
-                              final TextEditingController editController = TextEditingController();
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context){
-                                  return AlertDialog(
-                                    title: Text("Modify name"),
-                                    content: TextField(
-                                      controller: editController,
-                                      decoration: InputDecoration(
-                                        labelText: "Name",
-                                        border: OutlineInputBorder()
-                                      ),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: (){Navigator.pop(context);},
-                                        child: Text("Cancel")
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: (){
-                                          if(editController.text.isEmpty){
-                                            ScaffoldMessenger.of(context).clearSnackBars();
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Name input is empty"))
-                                            );
-                                          }
-                                          else{
-                                            Navigator.pop(context, modifyName?.call(index, editController.text));
-                                          }
-                                        },
-                                        child: Text("Confirm")
-                                      )
-                                    ]
-                                  );
-                                }
-                              );
-                            },
-                            icon: Icon(Icons.edit, color: Colors.blueGrey)
-                          ),
-                          IconButton(
-                            onPressed: (){delName?.call(index);},
-                            icon: Icon(Icons.delete, color: Colors.blueGrey)
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                child: NameItem(name: names[index], modifyName: () => _showDialogEdit(context, index), delName: () => _showDeleteConfirm(context, index))
               );
             }
           )
         );
+  }
+
+
+
+  _showDialogEdit(BuildContext context, int index) {
+    final TextEditingController editController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: Text("Modify name"),
+          content: TextField(
+            controller: editController,
+            decoration: InputDecoration(
+              labelText: "Name",
+              border: OutlineInputBorder()
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: (){Navigator.pop(context);},
+              child: Text("Cancel")
+            ),
+            ElevatedButton(
+              onPressed: (){
+                if(editController.text.isEmpty){
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Name input is empty"))
+                  );
+                }
+                else{
+                  modifyName?.call(index, editController.text);
+                  Navigator.pop(context);
+                }
+              },
+              child: Text("Confirm")
+            )
+          ]
+        );
+      }
+    );
+  }
+
+  void _showDeleteConfirm(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Delete name"),
+        content: Text("Are you sure you want to delete this name?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              delName?.call(index);
+              Navigator.pop(context);
+            },
+            child: Text("Delete"),
+          ),
+        ],
+      ),
+    );
   }
 }
