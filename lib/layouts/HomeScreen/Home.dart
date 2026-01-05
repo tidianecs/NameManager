@@ -28,6 +28,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void modifyName(int index, String newName){
+    setState(() {
+      print("${names[index]} becomes ${newName}");
+      names[index] = newName;
+    });
+  }
+
+  void delName(int index){
+    setState(() {
+      print("${names[index]} deleted");
+      names.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           if(names.isEmpty) Container(margin: EdgeInsets.only(top: 20), child: Text("No names yet", style: TextStyle(color: Colors.blueGrey))),
-          Namelist(names: names),
+          Namelist(names: names, modifyName: modifyName, delName: delName),
           AddButton(addName: goToAddName)
         ],
       ),
