@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'CounterButton.dart';
+import 'InputName.dart';
 
 class Callbackscreen extends StatefulWidget {
   const Callbackscreen({super.key});
@@ -9,23 +9,33 @@ class Callbackscreen extends StatefulWidget {
 }
 
 class _CallbackscreenState extends State<Callbackscreen> {
-  int count = 0;
+  List<String> names = [];
 
-  void increment(){
+  void addName(String name){
     setState(() {
-      count++;
+      names.add(name);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30),
-      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.only(top: 50),
       child: Column(
         children: [
-          Center(child: Text("${count}", style: TextStyle(color: Colors.white))),
-          Counterbutton(increment: increment)
+          Flexible(
+            flex: 2,
+            child: ListView.builder(
+              itemCount: names.length,
+              itemBuilder: (context, index){
+                return Text(names[index]);
+              }
+            )
+          ),
+          Flexible(
+            flex: 1,
+            child: Inputname(addName: addName)
+          )
         ],
       ),
     );
