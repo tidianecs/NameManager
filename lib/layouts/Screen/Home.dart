@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../AddNameScreen.dart';
-import 'NameList.dart';
-import 'AddButton.dart';
+import 'AddNameScreen.dart';
+import '../Widget/NameList.dart';
+import '../Widget/AddButton.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'layouts/HomeScreen/Home.dart';
-import 'layouts/Tranining/CallBackScreen.dart';
+import 'layouts/Screen/Home.dart';
+//import 'layouts/Tranining/CallBackScreen.dart';
 
 void main() {
   runApp(
@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
           title: Title(color: Colors.white, child: Center(child: Text("Name Manager", style: textColor))),
           backgroundColor: Colors.blueGrey,
         ),
-        body: Callbackscreen(),
-        //HomeScreen(),
+        body: HomeScreen(),
         backgroundColor: Colors.black87,
       ),
     );
