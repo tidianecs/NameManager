@@ -1,5 +1,4 @@
-import 'package:first_training_mobile/train/FirstProvider.dart';
-import 'package:first_training_mobile/train/trainLayout.dart';
+import 'package:first_training_mobile/layouts/Provider/NameProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'layouts/Screen/Home.dart';
@@ -7,7 +6,7 @@ import 'layouts/Screen/Home.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => Counter(),
+      create: (_) => Nameprovider(),
       child: const MyApp(), 
     )
   );
@@ -28,8 +27,7 @@ class MyApp extends StatelessWidget {
           title: Title(color: Colors.white, child: Center(child: Text("Name Manager", style: textColor))),
           backgroundColor: Colors.blueGrey,
         ),
-        body: Trainlayout(),
-        //HomeScreen(),
+        body: HomeScreen(),
         backgroundColor: Colors.black87,
       ),
     );
