@@ -1,11 +1,15 @@
+import 'package:first_training_mobile/layouts/Provider/NameProvider.dart';
+import 'package:first_training_mobile/layouts/Screen/FavNameScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'NameItem.dart';
 
 class Namelist extends StatelessWidget {
   final List<String> names;
   final Function(int, String)? modifyName;
   final Function(int)? delName;
-  const Namelist({super.key, required this.names, this.modifyName, this.delName});
+  final Function(String)? toggleFav;
+  const Namelist({super.key, required this.names, required this.modifyName, required this.delName, required this.toggleFav});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class Namelist extends StatelessWidget {
                 color: Colors.white,
                 margin: EdgeInsets.only(top: 10),
                 padding: EdgeInsets.all(20),
-                child: NameItem(name: names[index], modifyName: () => _showDialogEdit(context, index), delName: () => _showDeleteConfirm(context, index))
+                child: NameItem(name: names[index], modifyName: () => _showDialogEdit(context, index), delName: () => _showDeleteConfirm(context, index), toggleFav: () => toggleFav?.call(names[index]))
               );
             }
           )
@@ -27,7 +31,7 @@ class Namelist extends StatelessWidget {
 
 
 
-  _showDialogEdit(BuildContext context, int index) {
+  void _showDialogEdit(BuildContext context, int index) {
     final TextEditingController editController = TextEditingController();
     showDialog(
       context: context,
@@ -88,5 +92,17 @@ class Namelist extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _showFavName(BuildContext context) async{
+      String name = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => Favnamescreen()
+        )
+      );
+
+      if(name.isEmpty)return;
+      context.read<Nameprovider>().addFavName(name);
   }
 }

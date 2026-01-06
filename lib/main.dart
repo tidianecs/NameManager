@@ -1,3 +1,4 @@
+import 'package:first_training_mobile/layouts/Provider/FavoriteProvider.dart';
 import 'package:first_training_mobile/layouts/Provider/NameProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -5,9 +6,11 @@ import 'layouts/Screen/Home.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => Nameprovider(),
-      child: const MyApp(), 
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Nameprovider())
+      ],
+      child: const MyApp()
     )
   );
 }

@@ -4,7 +4,8 @@ class NameItem extends StatelessWidget {
   final String name;
   final VoidCallback modifyName;
   final VoidCallback delName;
-  const NameItem({super.key, required this.name, required this.modifyName, required this.delName});
+  final VoidCallback toggleFav;
+  const NameItem({super.key, required this.name, required this.modifyName, required this.delName, required this.toggleFav});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,12 @@ class NameItem extends StatelessWidget {
                       Center(child: Text(name, style: TextStyle(color: Colors.blueGrey))),
                       Row(
                         children: [
+                          IconButton(
+                            onPressed: (){
+                              toggleFav();
+                            },
+                            icon: Icon(Icons.favorite, color: Colors.blueGrey)
+                          ),
                           IconButton(
                             onPressed: (){
                               modifyName();

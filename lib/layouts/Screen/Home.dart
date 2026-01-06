@@ -1,3 +1,4 @@
+import 'package:first_training_mobile/layouts/Provider/FavoriteProvider.dart';
 import 'package:first_training_mobile/layouts/Provider/NameProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Namelist(
             names: context.watch<Nameprovider>().names,
             modifyName: context.read<Nameprovider>().modifyName,
-            delName: context.read<Nameprovider>().delName),
+            delName: context.read<Nameprovider>().delName,
+            toggleFav: context.read<Nameprovider>().addFavName
+          ),
           AddButton(addName: goToAddName)
         ],
       ),
