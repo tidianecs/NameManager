@@ -1,10 +1,15 @@
+import 'package:first_training_mobile/train/FirstProvider.dart';
+import 'package:first_training_mobile/train/trainLayout.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'layouts/Screen/Home.dart';
-//import 'layouts/Tranining/CallBackScreen.dart';
 
 void main() {
   runApp(
-    MyApp()
+    ChangeNotifierProvider(
+      create: (_) => Counter(),
+      child: const MyApp(), 
+    )
   );
 }
 
@@ -23,7 +28,8 @@ class MyApp extends StatelessWidget {
           title: Title(color: Colors.white, child: Center(child: Text("Name Manager", style: textColor))),
           backgroundColor: Colors.blueGrey,
         ),
-        body: HomeScreen(),
+        body: Trainlayout(),
+        //HomeScreen(),
         backgroundColor: Colors.black87,
       ),
     );
