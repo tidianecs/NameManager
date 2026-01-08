@@ -1,7 +1,8 @@
 import 'package:first_training_mobile/layouts/Provider/FavoriteProvider.dart';
 import 'package:first_training_mobile/layouts/Provider/NameProvider.dart';
-import 'package:first_training_mobile/train/TaskProvider.dart';
-import 'package:first_training_mobile/train/TaskScreen.dart';
+import 'package:first_training_mobile/train/layouts/NoteScreen.dart';
+import 'package:first_training_mobile/train/provider/NoteProvider.dart';
+import 'package:first_training_mobile/train/repository/NoteRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'layouts/Screen/Home.dart';
@@ -10,7 +11,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => Taskprovider() /*Nameprovider()*/)
+        Provider(create: (_) => Noterepository()),
+        ChangeNotifierProvider(create: (_) => Noteprovider() /*Nameprovider()*/)
       ],
       child: const MyApp()
     )
@@ -29,10 +31,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Title(color: Colors.white, child: Center(child: Text("Task Manager", style: textColor))),
+          title: Title(color: Colors.white, child: Center(child: Text("Notes Manager", style: textColor))),
           backgroundColor: Colors.blueGrey,
         ),
-        body: Taskscreen(),
+        body: Notescreen(),
         //HomeScreen(),
         backgroundColor: Colors.black87,
       ),
