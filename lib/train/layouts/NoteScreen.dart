@@ -50,7 +50,7 @@ class _NotescreenState extends State<Notescreen> {
       case Noteuistate.error:
         return Text("${provider.errorMessage} !", style: TextStyle(color: Colors.white70));
       case Noteuistate.loading:
-        return Text("LOADING...", style: TextStyle(color: Colors.white70));
+        return const Center(child: CircularProgressIndicator());
       case Noteuistate.success:
         return Notelist(notes: provider.notes, delName: provider.delNote);      
       case Noteuistate.idle:
