@@ -11,7 +11,7 @@ class Notelist extends StatelessWidget {
     return ListView.builder(
         itemCount: notes?.length ?? 0,
         itemBuilder: (context, index){
-          return Noteitem(name: notes![index], delName: () => delName);
+          return Noteitem(name: notes![index], delName: () => delName!(index));
         }
     );
   }

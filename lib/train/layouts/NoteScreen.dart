@@ -35,7 +35,7 @@ class _NotescreenState extends State<Notescreen> {
             ),
             Flexible(
               flex: 1,
-              child: Notesloadbutton()
+              child: Notesloadbutton(loadNotes: provider.loadNotes)
             )
           ],
         )

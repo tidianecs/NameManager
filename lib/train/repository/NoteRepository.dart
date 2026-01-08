@@ -1,10 +1,13 @@
+import 'package:first_training_mobile/train/repository/FakeApiRepository.dart';
+
 class Noterepository {
+  final Fakeapirepository? apiRepository;
   List<String> notes = [];
 
-  Future<List<String>> loadNotes() async{
-    await Future.delayed(Duration(seconds: 1));
+  Noterepository({this.apiRepository});
 
-    notes = ["Learning Flutter", "Make lot of project", "Review angular"];
+  Future<List<String>> loadNotes() async{
+    notes = await apiRepository!.fetchNotes();
     print(notes);
     return notes;
   }

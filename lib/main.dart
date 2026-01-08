@@ -6,15 +6,25 @@ import 'package:first_training_mobile/train/repository/NoteRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'layouts/Screen/Home.dart';
+import 'package:first_training_mobile/train/repository/FakeApiRepository.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        Provider(create: (_) => Noterepository()),
-        ChangeNotifierProvider(create: (_) => Noteprovider() /*Nameprovider()*/)
+        Provider(create: (_) => Fakeapirepository()),
+        Provider(
+          create: (context) => Noterepository(
+            apiRepository: context.read<Fakeapirepository>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Noteprovider(
+            repository: context.read<Noterepository>(),
+          ),
+        /*Nameprovider()*/),
       ],
-      child: const MyApp()
+      child: const MyApp(),
     )
   );
 }
